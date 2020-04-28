@@ -3,8 +3,10 @@ const { app, BrowserWindow, ipcMain } = electron;
 const path = require("path");
 const ffmpeg = require("fluent-ffmpeg");
 
+let mainWindow;
+
 app.on("ready", () => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: false, // is default value after Electron v5
       contextIsolation: true, // protect against prototype pollution
@@ -17,6 +19,6 @@ app.on("ready", () => {
 
 ipcMain.on("video:submit", (event, path) => {
   ffmpeg.ffprobe(path, function (err, metadata) {
-    console.log("video durations is: ", metadata.format.duration);
+    mainWindow.webContents.send("video:length", metadata.format.duration);
   });
 });

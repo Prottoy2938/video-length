@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "electron": "electron ."
+    "start": "electron ."
   },
   "keywords": [],
   "author": "",
