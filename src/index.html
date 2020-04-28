@@ -1,0 +1,19 @@
+<head> </head>
+<body style="background-color: #999393;">
+  <h1>Video Content</h1>
+  <form>
+    <div>
+      <label for="get-video">Insert your video:</label>
+      <input type="file" accept="video/*" id="get-video" />
+    </div>
+    <button type="submit">Get info</button>
+  </form>
+  <script>
+    //don't require any module here, it will open a security hole. More details here: https://stackoverflow.com/questions/44391448/electron-require-is-not-defined/57049268#57049268
+    document.querySelector("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { path } = document.querySelector("input").files[0];
+      window.api.send("video:submit", path);
+    });
+  </script>
+</body>
